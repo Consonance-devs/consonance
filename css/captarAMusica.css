@@ -1,6 +1,6 @@
 #divTop {
     background:#000000;
-    height = "5px";
+    height: 5px;
     position:absolute;
     top: 20%;
     left:0;
@@ -16,7 +16,7 @@
 
 #divBot {
     background:#000000;
-    height = "5px";
+    height: 5px;
     position:absolute;
     bottom: 20%;
     left:0;
