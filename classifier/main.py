@@ -35,8 +35,8 @@ def findpeaks(filename, music, limit=None, song_name=None):
 
 music1 = []
 music2 = []
-findpeaks("comeasyouare1.mp3", music1)
-findpeaks("comeasyouare2.mp3", music2)
+findpeaks("music1.mp3", music1)
+findpeaks("music2.mp3", music2)
 
 '''print "Sample1, Channel 1"
 print music1[0]
