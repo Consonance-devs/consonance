@@ -1,0 +1,61 @@
+<head>
+	<title> Consonance </title>
+
+	<link type="text/css" href="packages/fontawesome4/lib/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+  
+<body>
+	{{>navbar}}
+	{{>pagecontent}}
+</body>
+
+<template name="pagecontent">
+	<div id="pagecontent">
+		<div>
+			<button type="button" class="btn btn-primary" id="showrecordmenu" enable> Show/Hide recording menu </button>
+			<a href=""> Empty </a>
+			{{>uploader}}
+
+
+		</div>
+
+		{{#if recording}}
+			{{>recordbuttons}}
+		{{/if}}
+		
+	</div>
+</template>
+
+<template name="recordbuttons">
+	<div id="container">
+		<div id="recordmenu">
+			<button class="btn btn-success icBtn">
+				<i class="fa fa-microphone ic" id="record" > </i>
+			</button>
+			<button class="btn btn-success icBtn">
+				<i class="fa fa-stop ic" id="stop"> </i>
+			</button>
+			
+		</div>
+	</div>
+	
+</template>
+
+<template name="navbar">
+	<nav class="navbar navbar-default navbar-static-top navbar-inverse topbar" role="navigation">
+		<div class="container">
+			<h3>ABOUT</h3>
+		</div>
+	</nav>
+</template>
+
+
+<template name="uploader">
+<form>
+	<input type="file" name="file" accept="audio/*" capture>
+	<div>
+	<input type="submit" value="Upload Record">
+	</div>
+</form>
+</template>
