@@ -20,6 +20,8 @@ def intersect(a, b):
 
 
 def compare(a, b):
+	a = merge(a)
+	b = merge(b)
 	bestinc = 0
 	best = 0
 
