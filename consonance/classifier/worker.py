@@ -1,3 +1,4 @@
+
 from fingerprint import findpeaks
 from sys import argv
 from os import system
@@ -7,7 +8,7 @@ client = MongoClient('localhost', 27017)
 db = client.Consonance
 music = db.music
 
-from compare import compare
+from compare2 import compare
 
 from matplotlib import pyplot as plt
 
@@ -25,9 +26,9 @@ def main():
 	samplepeaks = sorted(sample[0] + sample[1])
 	print samplepeaks
 
-	plt.title("Samplepeaks")
+	'''plt.title("Samplepeaks")
 	plt.plot(*zip(*samplepeaks))
-	plt.show()
+	plt.show()'''
 
 	for m in music.find():
 		print m["music"]
