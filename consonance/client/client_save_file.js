@@ -8,7 +8,9 @@
  */
 Meteor.saveFile = function(blob, name, path, type, callback) {
   var fileReader = new FileReader(),
-    method, encoding = 'binary', type = type || 'binary';
+  method, encoding = 'binary', type = type || 'binary';
+  console.log("Meteor.savefile")
+  console.log(blob, name, path, type);
   switch (type) {
     case 'text':
       // TODO Is this needed? If we're uploading content from file, yes, but if it's from an input/textarea I think not...
@@ -25,7 +27,8 @@ Meteor.saveFile = function(blob, name, path, type, callback) {
       break;
   }
   fileReader.onload = function(file) {
-    Meteor.call('saveFile', file.srcElement.result, name, path, encoding, callback);
+    console.log(file)
+    Meteor.call('saveFile', file.target.result, name, path, encoding, callback);
   }
   fileReader[method](blob);
 }

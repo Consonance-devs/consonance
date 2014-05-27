@@ -1,7 +1,9 @@
 
 Result = new Meteor.Collection("results");
 
+
 if (Meteor.isClient) {
+  var a;
 
   Session.set("recording", true);
 
@@ -35,6 +37,8 @@ if (Meteor.isClient) {
       var fileinput = tmpl.find('input[type=file]');
       var form = e.currentTarget;
       var file = fileinput.files[0];
+      a = file;
+      console.log("file:");
       console.log(file);
       
 
@@ -78,11 +82,12 @@ if (Meteor.isServer) {
     Meteor.methods({
       uploadFile: function(userid){
         console.log("Upload Successful");
-        Fiber( function(){
+        console.log(userid)
+        /*Fiber( function(){
           exec('ls ../../../../../public', Meteor.bindEnvironment( function callback(error, stdout, stderr){
             console.log(stdout);
           }));
-        }).run();
+        }).run();*/
 
       }
     });

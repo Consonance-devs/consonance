@@ -34,6 +34,7 @@ print music2
 
 
 dp = [[0 for col in range(len(music2))] for row in range(len(music1))]
+s = 0
 
 def val(music1, music2, i, j):
 	if i>0 and j > 0:
@@ -56,7 +57,6 @@ def match(music1, music2, i, j):
 	print dp[len(music1)-1]
 	return min( (val, i) for (i, val) in enumerate(dp[len(music1)-1]) )
 	
-s = 0
 
 def reconstruct(i, j):
 	if i>0 and j>0 and dp[i][j] == dp[i-1][j-1] + abs(music1[i][1] - music2[j][1]):
