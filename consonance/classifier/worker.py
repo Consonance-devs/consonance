@@ -2,49 +2,46 @@
 from fingerprint import findpeaks
 from sys import argv
 from os import system
+from compare2 import *
+from matplotlib import pyplot as plt
+from readlyrics import *
 
 from pymongo import MongoClient
-client = MongoClient('localhost', 27017)
-db = client.Consonance
-music = db.music
+client = MongoClient('127.0.0.1', 3001)
+db = client.meteor
+music = db.Consonance
 
-from compare2 import compare
+#for i in music.find():
+#	print i["music"]
 
-from matplotlib import pyplot as plt
 
 # worker.py music.mp3
 
 def main():
-	bbest=1000000
-	bpos=0
 	best=0
 	bestmatch = ""
 
-	samplepeaks = []
-	sample = []
-	findpeaks(argv[1], sample)
-	samplepeaks = sorted(sample[0] + sample[1])
-	print samplepeaks
 
-	'''plt.title("Samplepeaks")
-	plt.plot(*zip(*samplepeaks))
+	sample = loadmusic(argv[1])
+	#print sample
+
+	'''plt.title("Sample Peaks")
+	plt.plot(*zip(*sample))
 	plt.show()'''
-
+	d = {}
 	for m in music.find():
-		print m["music"]
-		#print m["peaks"]
-		'''plt.title("peaks")
-		plt.plot(*zip(*m["peaks"]))
-		plt.show()'''
-		best, s = compare(samplepeaks, m["peaks"]);
-		print best, s
-		if best < bbest:
-			bbest = best
-			bpos = s
+		k, s = compare(sample, m["peaks"]);
+		d[k] = s
+		if k > best:
+			best = k
 			bestmatch = m["music"]
 
+	print correlation(d[max(d)], True)
 	print bestmatch
-	print bpos
+
+	srtfile = "/home/michel/data/db/" + bestmatch.split('.')[0] + ".srt"
+	print "srtfile: " + srtfile
+	readlyrics(srtfile, argv[2])
 
 
 main()

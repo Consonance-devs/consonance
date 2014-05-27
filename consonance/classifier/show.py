@@ -1,8 +1,8 @@
 
 from pymongo import MongoClient
-client = MongoClient('localhost', 27017)
-db = client.Consonance
-music = db.music
+client = MongoClient('127.0.0.1', 3001)
+db = client.meteor
+music = db.Consonance
 
 for m in music.find():
 	print "Name: " + m["music"]
