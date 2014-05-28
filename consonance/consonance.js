@@ -2,32 +2,49 @@
 Result = new Meteor.Collection("results");
 Consonance = new Meteor.Collection("Consonance")
 Lyrics = new Meteor.Collection("Lyrics")
+Alerts = new Meteor.Collection("Alerts");
 
 if (Meteor.isClient) {
 
   Session.set("recording", true);
+  Session.set("lyricsDisp", false);
+  Session.set("lyrics", 0);
 
   Meteor.startup(function(){
     window.scroll(0,1);
     var curlyrics = 0;
+
+    Meteor.autosubscribe(function() {
+      Alerts.find().observe({
+        added: function(item){ 
+          //alert(item.message);
+          nextLyrics();
+        }
+      });
+    });
+
   });
+
+  function nextLyrics(){
+    //Lyrics.find().forEach(function(i){console.log(i)});
+    if(Lyrics.findOne({index: Session.get("lyrics")}) ){
+      Meteor.setTimeout(nextLyrics, Lyrics.findOne({index: Session.get("lyrics")}).time );
+      Session.set("lyrics", Session.get("lyrics")+1);
+      console.log( Lyrics.findOne({index: Session.get("lyrics")}) );
+    }else{
+      console.log("empty")
+      Meteor.setTimeout(nextLyrics, 1000);
+    }
+    
+  }
 
   Template.pagecontent.events({
     'click #showrecordmenu': function(){
       Session.set("recording", true);
     }
-
   });
 
-  Template.recordbuttons.events({
-    'click input': function () {
-      // template data, if any, is available in 'this'
-      if (typeof console !== 'undefined')
-        console.log("You pressed the button");
-    }
-  });
-
-    Template.navbar.events({
+  Template.navbar.events({
     'click #consonating': function () {
       console.log('Consonating clicked!')
     }
@@ -44,10 +61,17 @@ if (Meteor.isClient) {
       console.log('About clicked!')
     }
   });
-
+  
   Template.pagecontent.recording = function() {
     //return Session.get("recording");
     return true;
+  }
+  Template.pagecontent.lyricsDisp = function() {
+    return Session.get("lyricsDisp");
+  }
+
+  Template.lyrics.getCurrent = function(){
+    return Lyrics.findOne({index: Session.get("lyrics")});
   }
 
   Template.uploader.events({
@@ -70,7 +94,18 @@ if (Meteor.isClient) {
             throw err;
           }else{
             console.log(data);
-            curlyrics = data;
+            Session.set("lyrics", data);
+            Session.set("lyricsDisp", true);
+            console.log("lyrics: ");
+            //Meteor.setInterval(derpfunc, 10000);
+            //console.log(Lyrics.findOne({index: data}))
+            /*Meteor.setTimeout(function (){
+              var f = Lyrics.findOne({index: data});
+              console.log(f):
+              var t = f.time;
+              Meteor.setTimeout(nextLyrics, t);
+            }, 5000);*/
+
           }
         });
       });
@@ -114,11 +149,17 @@ if (Meteor.isServer) {
             //name = r[r.length-1];
             //corr = int(r[r.length-2]);
             
-            Lyrics.find({}, {"order": 1}).forEach(function(i){
+            /*Lyrics.find({}, {"index": 1}).forEach(function(i){
               console.log(i);
+            });*/
+
+            Meteor.publish("alerts", function(){
+              Alerts.find();
             });
+            Alerts.remove({});
+            Alerts.insert({message: "Some message to show on every client.", userId: userId});
 
-
+            console.log("END");
           }));
         }).run();
         /*console.log(name, corr);

@@ -17,6 +17,7 @@ def readlyrics(filepath, userid):
 	state = INDEX
 	index = 0
 	time = 0
+	start = 0
 	text = ""
 	result = []
 	#print "filepath: " + filepath
@@ -37,7 +38,8 @@ def readlyrics(filepath, userid):
 		elif state == HEADER:
 			line = f.readline()
 			raw = line.split()
-			time = parsems(raw[2]) - parsems(raw[0])
+			start = parsems(raw[0])
+			time = parsems(raw[2]) - start
 		elif state == TEXT:
 			text = ""
 			while True:
@@ -45,7 +47,7 @@ def readlyrics(filepath, userid):
 				if line == "\n" or line == "":
 					break
 				text += line
-			result.append((index, time, text))
+			result.append((index, time, start, text))
 			#print index, time, text
 
 		state = (state + 1) % 3
@@ -56,10 +58,6 @@ def readlyrics(filepath, userid):
 	lyrics.remove({"userid": userid})
 	print "userid: " + userid
 	for i in result:
-		lyrics.insert({"index": i[0], "time": i[1], "text": i[2], "userid": userid})
-
-		#print "<" + line + ">"
+		lyrics.insert({"index": i[0], "time": i[1], "start": i[2], "text": i[3], "userid": userid})
 		
 #readlyrics("/home/michel/data/db/Aerosmith - I Dont Want To Miss A Thing.srt", )
-
-#readlyrics("/home/michel/data/db/Kings Of Leon - Use Somebody.srt", "asd")

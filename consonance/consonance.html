@@ -18,6 +18,9 @@
 			{{>recordbuttons}}
 		{{/if}}
         {{>uploader}}
+        {{#if lyricsDisp}}
+            {{>lyrics}}
+        {{/if}}
 
 	</div>
 </template>
@@ -62,4 +65,8 @@
             </form>
         </center>
     </div>
+</template>
+
+<template name="lyrics">
+    <h2> {{getCurrent.text}} </h2>
 </template>
