@@ -15,6 +15,12 @@ h3 {
 	color: white;
 }
 
+hr {
+    border-color:black;
+    border-width: 5px;
+    width: 85%;
+}
+
 .navbar_item {
     color: white;
     font-size: 15px;
@@ -82,9 +88,17 @@ btn-success:focus {
 }
 
 #image_container{
-    display: table-cell;
-    vertical-align: middle;
+    margin-top: 65px;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
+    vertical-align: middle;
+    width: 100%;
+}
+
+#about_text {
+    margin-top: 10px;
+    font-weight: bold;
 }
 
 #howtouse{
@@ -96,14 +110,27 @@ btn-success:focus {
     text-align: center
 }
 
-howtouse_text{
+#howtouse_text{
     display: table-cell;
     vertical-align: middle;
     text-align: center;
+    font-weight: bold;
 }
 
-#title{
-    
+#home_content {
+    margin-top: 65px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+}
+
+#home_text {
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    font-size: 30px;
 }
 
 #pagecontent{
