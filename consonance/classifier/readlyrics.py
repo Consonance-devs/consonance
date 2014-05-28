@@ -18,14 +18,11 @@ def readlyrics(filepath, userid):
 	index = 0
 	time = 0
 	start = 0
+	end = -1
 	text = ""
 	result = []
-	#print "filepath: " + filepath
-	#f = open(filepath, 'r')
+	
 	f = open(filepath, 'r')
-	print "/home/michel/data/db/Kings Of Leon - Use Somebody.srt" == filepath
-	print "<" + "/home/michel/data/db/Kings Of Leon - Use Somebody.srt" + ">"
-	print "<" + filepath + ">"
 	while True:
 		if state == INDEX:
 			line = f.readline()
@@ -47,6 +44,11 @@ def readlyrics(filepath, userid):
 				if line == "\n" or line == "":
 					break
 				text += line
+
+			if len(result) > 0:
+				t = result[len(result)-1][2] + result[len(result)-1][1];
+				result.append((index, start - t, t, ""));
+				index += 1;
 			result.append((index, time, start, text))
 			#print index, time, text
 
@@ -59,5 +61,9 @@ def readlyrics(filepath, userid):
 	print "userid: " + userid
 	for i in result:
 		lyrics.insert({"index": i[0], "time": i[1], "start": i[2], "text": i[3], "userid": userid})
+
+	print "Added Lyrics to Lyrics Collection."
+
+	
 		
 #readlyrics("/home/michel/data/db/Aerosmith - I Dont Want To Miss A Thing.srt", )

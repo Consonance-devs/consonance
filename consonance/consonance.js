@@ -17,6 +17,7 @@ if (Meteor.isClient) {
     Meteor.autosubscribe(function() {
       Alerts.find().observe({
         added: function(item){ 
+          console.log("Show lyrics");
           nextLyrics();
         }
       });
@@ -26,15 +27,15 @@ if (Meteor.isClient) {
 
   function nextLyrics(){
     if(Lyrics.findOne({index: Session.get("lyrics")}) ){
-      Meteor.setTimeout(nextLyrics, Lyrics.findOne({index: Session.get("lyrics")}).time );
       Session.set("lyrics", Session.get("lyrics")+1);
+      Meteor.setTimeout(nextLyrics, Lyrics.findOne({index: Session.get("lyrics")}).time );
       //console.log( Lyrics.findOne({index: Session.get("lyrics")}) );
     }else{
+      //Session.set("lyricsDisp", false);
       console.log("empty");
-      return;
+      //return;
       //Meteor.setTimeout(nextLyrics, 1000);
     }
-    
   }
 
   Template.pagecontent.events({
@@ -117,10 +118,7 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Fiber = Npm.require('fibers');
   Meteor.startup(function () {
-
-    Result.remove({});
     Lyrics.remove({});
-    
     /*Result.insert({result: "asdasd"});
     var traceResults = function(){
       var r = Result.find();
@@ -134,10 +132,12 @@ if (Meteor.isServer) {
 
     Meteor.methods({
       uploadFile: function(filename, userId){
+        Lyrics.remove({userid: userId});
         console.log("Upload Successful");
         var name = "";
         var corr = 0;
         Fiber( function(){
+
           cmd = 'cd ../../../../../classifier; pwd; ' + 'python2 worker.py ' + filename + " " + userId;
           //console.log("cmd", cmd);
           console.log("Start Processing");
@@ -165,7 +165,7 @@ if (Meteor.isServer) {
         Consonance.find({}).forEach(function(i){
           console.log(i);
         });*/
-        return 3
+        return 1
       }
     });
 
