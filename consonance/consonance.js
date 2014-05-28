@@ -17,7 +17,6 @@ if (Meteor.isClient) {
     Meteor.autosubscribe(function() {
       Alerts.find().observe({
         added: function(item){ 
-          //alert(item.message);
           nextLyrics();
         }
       });
@@ -26,14 +25,14 @@ if (Meteor.isClient) {
   });
 
   function nextLyrics(){
-    //Lyrics.find().forEach(function(i){console.log(i)});
     if(Lyrics.findOne({index: Session.get("lyrics")}) ){
       Meteor.setTimeout(nextLyrics, Lyrics.findOne({index: Session.get("lyrics")}).time );
       Session.set("lyrics", Session.get("lyrics")+1);
-      console.log( Lyrics.findOne({index: Session.get("lyrics")}) );
+      //console.log( Lyrics.findOne({index: Session.get("lyrics")}) );
     }else{
-      console.log("empty")
-      Meteor.setTimeout(nextLyrics, 1000);
+      console.log("empty");
+      return;
+      //Meteor.setTimeout(nextLyrics, 1000);
     }
     
   }
@@ -61,7 +60,7 @@ if (Meteor.isClient) {
       console.log('About clicked!')
     }
   });
-  
+
   Template.pagecontent.recording = function() {
     //return Session.get("recording");
     return true;
