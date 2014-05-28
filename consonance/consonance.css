@@ -4,9 +4,33 @@ body{
 	background-color: #16BF7C;
 }
 
+span {
+    color: white;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
 h3 {
 	text-align: right;
 	color: white;
+}
+
+li {
+    color: white;
+    font-size: 15px;
+}
+
+li:hover {
+    cursor: pointer;
+}
+
+#navigation {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: black;
+    border: 0;
+    z-index: 100;
 }
 
 #record{
@@ -62,12 +86,13 @@ btn-success:focus {
 }
 
 #pagecontent{
+    margin-top: 30%;
 	position: absolute;
     margin-right: auto;
     margin-left: auto;
     text-align: center;
-	height: 85%;
 	width: 100%;
+    height: 70%;
     vertical-align: middle;
 }
 
@@ -84,34 +109,27 @@ input[type=file]{
     border-radius: 3px;
     padding: 10px 15px 11px !important;
     font-size: 18px !important;
-    background-color: #57d6c7;
+    background-color: #04AF6C;
     font-weight: bold;
-    text-shadow: 1px 1px #57D6C7;
     color: #ffffff;
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    border: 1px solid #57D6C7;
+    border: 1px solid #04AF6C;
     cursor: pointer;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
 }
 
 input[type=submit]{
+    margin-top: 5px;
     border-radius: 3px;
     padding: 10px 15px 11px !important;
     font-size: 18px !important;
-    background-color: #57d6c7;
+    background-color: #04AF6C;
     font-weight: bold;
-    text-shadow: 1px 1px #57D6C7;
     color: #ffffff;
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    border: 1px solid #57D6C7;
+    border: 1px solid #04AF6C;
     cursor: pointer;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
 }

@@ -26,6 +26,25 @@ if (Meteor.isClient) {
         console.log("You pressed the button");
     }
   });
+
+    Template.navbar.events({
+    'click #consonating': function () {
+      console.log('Consonating clicked!')
+    }
+  });
+    
+  Template.navbar.events({
+    'click #how_to_use': function () {
+      console.log('How to use clicked!')
+    }
+  });
+
+  Template.navbar.events({
+    'click #about': function () {
+      console.log('About clicked!')
+    }
+  });
+
   Template.pagecontent.recording = function() {
     //return Session.get("recording");
     return true;

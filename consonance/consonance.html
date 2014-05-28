@@ -7,6 +7,7 @@
   
 <body>
 	{{>navbar}}
+    <div id = "teste"></div>
 	{{>pagecontent}}
 </body>
 
@@ -32,17 +33,25 @@
     </div>
 </template>
 
-<template name="navbar">
-	<nav class="navbar navbar-default navbar-static-top navbar-inverse topbar" role="navigation">
-        <div class="container">
-            <img href="C.png" onclick="mostrarmenu"/>
+<template name = "navbar">
+    <nav id = "navigation" role = "navigation">
+        <div class = "container-fluid">
+            <div class = "navbar-header">
+                <button type = "button" class = "navbar-toggle" data-toggle = "collapse" data-target = "#navigation-collapse">
+                    <i class = "fa fa-music" style ="width: 15px; heigth: 15px;"></i>
+                </button>
+                <div class = "navbar-brand"><span>Consonance</span></div>
+            </div>
+            <div id = "navigation-collapse" class = "collapse navbar-collapse">
+                <ul class = "nav navbar-nav navbar-right">
+                    <li id = "consonating">Consonating</li>
+                    <li id = "how_to_use">How to use</li>
+                    <li id = "about">About</li>
+                </ul>
+            </div>
         </div>
-		<div class="container">
-			<h3>CONSONATING</h3>
-		</div>
-	</nav>
+    </nav>
 </template>
-
 
 <template name="uploader">
     <div id="uploadfile">
