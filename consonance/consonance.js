@@ -31,9 +31,8 @@ if (Meteor.isClient) {
       Meteor.setTimeout(nextLyrics, Lyrics.findOne({index: Session.get("lyrics")}).time );
       //console.log( Lyrics.findOne({index: Session.get("lyrics")}) );
     }else{
-      //Session.set("lyricsDisp", false);
-      console.log("empty");
-      //return;
+      Session.set("lyricsDisp", false);
+      return;
       //Meteor.setTimeout(nextLyrics, 1000);
     }
   }
@@ -75,7 +74,7 @@ if (Meteor.isClient) {
   }
 
   Template.uploader.events({
-    'submit form': function(e, tmpl){
+    'change input': function(e, tmpl){
       var userId = Meteor.default_connection._lastSessionId;
 
       e.preventDefault();
@@ -83,10 +82,9 @@ if (Meteor.isClient) {
       var form = e.currentTarget;
       var file = fileinput.files[0];
       console.log("file: ", file);
-      
 
       var filename = userId + "\.mp3";
-      var directory = "/tmp/"
+      var directory = "/tmp/";
       Meteor.saveFile(file, filename, directory, 'binary', function(){
         console.log("name: " + userId);
         Meteor.call("uploadFile", directory + filename, userId, function(err, data){
@@ -96,16 +94,6 @@ if (Meteor.isClient) {
             console.log(data);
             Session.set("lyrics", data);
             Session.set("lyricsDisp", true);
-            console.log("lyrics: ");
-            //Meteor.setInterval(derpfunc, 10000);
-            //console.log(Lyrics.findOne({index: data}))
-            /*Meteor.setTimeout(function (){
-              var f = Lyrics.findOne({index: data});
-              console.log(f):
-              var t = f.time;
-              Meteor.setTimeout(nextLyrics, t);
-            }, 5000);*/
-
           }
         });
       });
@@ -117,58 +105,47 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   Fiber = Npm.require('fibers');
+  exec = Npm.require('child_process').exec;
+  
   Meteor.startup(function () {
     Lyrics.remove({});
-    /*Result.insert({result: "asdasd"});
-    var traceResults = function(){
-      var r = Result.find();
-      console.log("Results:");
-      r.forEach(function(entry){
-        console.log("- " + entry.result);
-      });
-    }*/
-
-    var exec = Npm.require('child_process').exec;
 
     Meteor.methods({
       uploadFile: function(filename, userId){
-        Lyrics.remove({userid: userId});
+        Lyrics.remove({userId: userId});
         console.log("Upload Successful");
         var name = "";
         var corr = 0;
-        Fiber( function(){
+        pyWorker(filename, userId);
+        //console.log(name, corr);
 
-          cmd = 'cd ../../../../../classifier; pwd; ' + 'python2 worker.py ' + filename + " " + userId;
-          //console.log("cmd", cmd);
-          console.log("Start Processing");
-          exec(cmd, Meteor.bindEnvironment( function callback(error, stdout, stderr){
-            console.log(stderr);
-            console.log(stdout);
-            var r = stdout.split('\n');
-            //name = r[r.length-1];
-            //corr = int(r[r.length-2]);
-            
-            /*Lyrics.find({}, {"index": 1}).forEach(function(i){
-              console.log(i);
-            });*/
-
-            Meteor.publish("alerts", function(){
-              Alerts.find();
-            });
-            Alerts.remove({});
-            Alerts.insert({message: "Some message to show on every client.", userId: userId});
-
-            console.log("END");
-          }));
-        }).run();
-        /*console.log(name, corr);
-        Consonance.find({}).forEach(function(i){
-          console.log(i);
-        });*/
         return 1
       }
     });
 
   });
+
+  function pyWorker(filename, userId){
+    Fiber( function(){
+      cmd = 'cd ../../../../../classifier; pwd; ' + 'python2 worker.py ' + filename + " " + userId;
+      //console.log("cmd", cmd);
+      console.log("Start Processing");
+      exec(cmd, Meteor.bindEnvironment( function callback(error, stdout, stderr){
+        console.log(stderr);
+        console.log(stdout);
+        var r = stdout.split('\n');
+        //name = r[r.length-1];
+        //corr = int(r[r.length-2]);
+
+        Meteor.publish("alerts", function(){
+          Alerts.find();
+        });
+        Alerts.remove({});
+        Alerts.insert({message: "Some message to show on every client.", userId: userId});
+
+        console.log("END");
+      }));
+    }).run();
+  }
 
 }

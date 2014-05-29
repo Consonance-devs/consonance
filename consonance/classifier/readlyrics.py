@@ -11,8 +11,8 @@ lyrics = db.Lyrics
 def parsems(s):
 	return int(s[0:2])*1000*60*60 + int(s[3:5])*1000*60 + int(s[6:8])*1000 + int(s[9:12])
 
-def readlyrics(filepath, userid):
-	print userid
+def readlyrics(filepath, userId):
+	print userId
 
 	state = INDEX
 	index = 0
@@ -57,10 +57,10 @@ def readlyrics(filepath, userid):
 		if line == "":
 			break
 
-	lyrics.remove({"userid": userid})
-	print "userid: " + userid
+	lyrics.remove({"userId": userId})
+	print "userId: " + userId
 	for i in result:
-		lyrics.insert({"index": i[0], "time": i[1], "start": i[2], "text": i[3], "userid": userid})
+		lyrics.insert({"index": i[0], "time": i[1], "start": i[2], "text": i[3], "userId": userId})
 
 	print "Added Lyrics to Lyrics Collection."
 

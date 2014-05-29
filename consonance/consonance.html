@@ -4,8 +4,8 @@
   
 <body>
 	{{>navbar}}
-    {{>about}}
     <!--{{>about}}-->
+    {{>pagecontent}}
 	<!--{{>pagecontent}}-->
 </body>
 
@@ -23,14 +23,6 @@
 </template>
 
 <template name="recordbuttons">
-    <div id="recordmenu">
-        <button class="btn btn-success icBtn">
-            <i class="fa fa-microphone ic" id="record" > </i>
-        </button>
-        <button class="btn btn-success icBtn">
-            <i class="fa fa-stop ic" id="stop"> </i>
-        </button>
-    </div>
 </template>
 
 <template name = "navbar">
@@ -58,7 +50,6 @@
         <center>
             <form>
                 <input type="file" name="file" accept="audio/*" capture>
-                <input type="submit" value="Upload Record">
             </form>
         </center>
     </div>
