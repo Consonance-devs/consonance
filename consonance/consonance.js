@@ -5,7 +5,7 @@ Lyrics = new Meteor.Collection("Lyrics")
 Alerts = new Meteor.Collection("Alerts");
 
 if (Meteor.isClient) {
-
+  var time;
   Session.set("recording", true);
   Session.set("lyricsDisp", false);
   Session.set("lyrics", 0);
@@ -19,6 +19,9 @@ if (Meteor.isClient) {
         added: function(item){ 
           console.log("Show lyrics");
           nextLyrics();
+          var elapsed = new Date() - time;
+          mil = elapsed.getMiliseconds();
+          console.log("Elapsed Time: ", time);
         }
       });
     });
@@ -75,6 +78,7 @@ if (Meteor.isClient) {
 
   Template.uploader.events({
     'change input': function(e, tmpl){
+      time = new Date();
       var userId = Meteor.default_connection._lastSessionId;
 
       e.preventDefault();
