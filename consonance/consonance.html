@@ -5,23 +5,28 @@
   
 <body>
 	{{>navbar}}
-    <!--{{> home}}-->
-    <!--{{> how_to_use}}-->
-    <!--{{> about}}-->
     {{>pagecontent}}
-	<!--{{>pagecontent}}-->
-
 </body>
 
 <template name="pagecontent">
 	<div id="pagecontent">
-
-		{{#if recording}}
-			{{>recordbuttons}}
-		{{/if}}
-        {{>uploader}}
-        {{#if lyricsDisp}}
-            {{>lyrics}}
+        {{#if homeDisp}}
+            {{> home}}
+        {{/if}}
+        {{#if aboutDisp}}
+            {{> about}}
+        {{/if}}
+        {{#if howToUseDisp}}
+            {{> how_to_use}}
+        {{/if}}
+        {{#if recording}}
+            {{>recordbuttons}}
+        {{/if}}
+        {{#if uploadDisp}}
+            {{>uploader}}
+            {{#if lyricsDisp}}
+                {{>lyrics}}
+            {{/if}}
         {{/if}}
 	</div>
 </template>
