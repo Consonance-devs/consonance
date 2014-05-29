@@ -6,6 +6,7 @@ Alerts = new Meteor.Collection("Alerts");
 
 if (Meteor.isClient) {
 
+  Session.set("page", "home");
   Session.set("recording", true);
   Session.set("lyricsDisp", false);
   Session.set("lyrics", 0);
@@ -40,24 +41,6 @@ if (Meteor.isClient) {
   Template.pagecontent.events({
     'click #showrecordmenu': function(){
       Session.set("recording", true);
-    }
-  });
-
-  Template.navbar.events({
-    'click #consonating': function () {
-      console.log('Consonating clicked!')
-    }
-  });
-    
-  Template.navbar.events({
-    'click #how_to_use': function () {
-      console.log('How to use clicked!')
-    }
-  });
-
-  Template.navbar.events({
-    'click #about': function () {
-      console.log('About clicked!')
     }
   });
 
