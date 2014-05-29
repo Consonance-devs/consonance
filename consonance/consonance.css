@@ -21,9 +21,18 @@ hr {
     width: 85%;
 }
 
+ul > hr {
+    border-color: white;
+    border-width: 1px;
+    width: 100%;
+}
+
 .navbar_item {
     color: white;
     font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
 }
 
 li:hover {
@@ -88,7 +97,7 @@ btn-success:focus {
 }
 
 #image_container{
-    margin-top: 65px;
+    margin-top: 25%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -118,7 +127,7 @@ btn-success:focus {
 }
 
 #home_content {
-    margin-top: 65px;
+    margin-top: 25%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
