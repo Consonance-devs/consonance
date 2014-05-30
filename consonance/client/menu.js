@@ -58,6 +58,10 @@ Template.navbar.uploadDispNB = function() {
   return (Session.get("page") == "consonance");
 }
 
+Temmplate.uploader.consonatingDisp = function() {
+  return Session.get("consonating");
+}
+
 $(function() {
   $('#navigation-collapse').on('click', 'li', null, function() {
     $('#navigation-collapse').collapse('hide');

@@ -76,6 +76,9 @@
         <div id = "spacer"></div>
         <hr id = "lyrics_hr">
         <div id = "lyrics_container">
+            {{#if consonatingDisp}}
+                CONSONATING...
+            {{/if}}
             {{#if lyricsDisp}}
                 {{>lyrics}}
             {{/if}}
