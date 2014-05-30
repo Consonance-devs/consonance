@@ -76,6 +76,7 @@ if (Meteor.isClient) {
 
   Template.uploader.events({
     'change input': function(e, tmpl){
+      Session.set("consonating", true);
       time = new Date();
       userId = Meteor.default_connection._lastSessionId;
 

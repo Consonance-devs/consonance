@@ -10,6 +10,10 @@ span {
     margin-left: 10px;
 }
 
+li {
+    margin-left: 25px;
+}
+
 h3 {
 	text-align: right;
 	color: white;
@@ -18,28 +22,42 @@ h3 {
 hr {
     border-color:black;
     border-width: 5px;
-    width: 85%;
+    width: 63%;
 }
 
 ul > hr {
     border-color: white;
     border-width: 1px;
+    margin: 5px;
     width: 100%;
 }
 
-#lyrics_hr {
+#lyrics_hr_top {
+    border-color:black;
+    border-width: 15px;
+    width: 85%;
+    overflow-x:hidden;
+}
+
+#lyrics_hr_bot {
+    border-color:black;
+    border-width: 15px;
+    width: 85%;
+    overflow-x:hidden;
+}
+
+#lyrics_hr_bottom {
     border-color:black;
     border-width: 15px;
     width: 85%;
 }
-
 li:hover {
     cursor: pointer;
 }
 
 .navbar_item {
     color: white;
-    font-size: 15px;
+    font-size: 17px;
 }
 
 #navigation {
@@ -100,7 +118,7 @@ btn-success:focus {
 }
 
 #image_container{
-    margin-top: -15%;
+    margin-top: -10%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -121,7 +139,7 @@ btn-success:focus {
 }
 
 #home_content {
-    margin-top: -15%;
+    margin-top: -10%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -137,7 +155,7 @@ btn-success:focus {
     text-align: center;
     font-weight: bold;
     color: black;
-    font-size: 30px;
+    font-size: 28px;
 }
 
 #pagecontent{
@@ -154,6 +172,10 @@ btn-success:focus {
 #lyrics_container {
     width: 100%;
     font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 190px;
 }
 
 .topbar{
@@ -167,7 +189,7 @@ btn-success:focus {
 }
 
 #spacer {
-    margin-top: 10%;
+    margin-top: -2%;
     height: 15%;
     width: 100%;
 }
@@ -176,22 +198,7 @@ input[type=file]{
     border-radius: 3px;
     padding: 10px 15px 11px !important;
     font-size: 18px !important;
-    width: 50%;
-    font-weight: bold;
-    color: #ffffff;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border: 1px solid #04AF6C;
-    cursor: pointer;
-}
-
-input[type=submit]{
-    margin-top: 5px;
-    border-radius: 3px;
-    padding: 10px 15px 11px !important;
-    font-size: 18px !important;
-    background-color: #04AF6C;
+    width: 70%;
     font-weight: bold;
     color: #ffffff;
     border-radius: 5px;
