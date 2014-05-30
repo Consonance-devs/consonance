@@ -27,10 +27,18 @@ ul > hr {
     width: 100%;
 }
 
-#lyrics_hr {
+#lyrics_hr_top {
     border-color:black;
     border-width: 15px;
     width: 85%;
+    overflow-x:hidden;
+}
+
+#lyrics_hr_bot {
+    border-color:black;
+    border-width: 15px;
+    width: 85%;
+    overflow-x:hidden;
 }
 
 #lyrics_hr_bottom {
