@@ -20,6 +20,7 @@ if (Meteor.isClient) {
       Alerts.find().observe({
         added: function(item){
           if(item.userId == userId){
+            stopFadingLyrics();
             console.log(item);
             console.log("Show lyrics");
             
@@ -77,6 +78,8 @@ if (Meteor.isClient) {
   Template.uploader.events({
     'change input': function(e, tmpl){
       Session.set("consonating", true);
+      startFadingLyrics();
+      startSlideAnimation();
       time = new Date();
       userId = Meteor.default_connection._lastSessionId;
 

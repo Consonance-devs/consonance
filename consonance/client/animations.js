@@ -1,5 +1,6 @@
 state="out";
 fadeLoop = null;
+slideLoop = null;
 sLeft = true;
 
 function fadeLyrics() {
@@ -33,4 +34,6 @@ function slideAnimation(){
     }
 }
 
-slideLoop = setInterval(slideAnimation,1000);
+function startSlideAnimation(){
+    slideLoop = setInterval(slideAnimation,1000);
+}
