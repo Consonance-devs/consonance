@@ -8,6 +8,7 @@ if (Meteor.isClient) {
   time = null;
   userId = null;
 
+  Session.set("consonating", false);
   Session.set("page", "home");
   Session.set("recording", true);
   Session.set("lyricsDisp", false);
@@ -20,7 +21,7 @@ if (Meteor.isClient) {
       Alerts.find().observe({
         added: function(item){
           if(item.userId == userId){
-            stopFadingLyrics();
+            //stopFadingLyrics();
             console.log(item);
             console.log("Show lyrics");
             
@@ -33,6 +34,7 @@ if (Meteor.isClient) {
                 Session.set("lyrics", i.index);
               }
             });
+            Session.set("consonating", false);
             Session.set("lyricsDisp", true);
 
             nextLyrics();
@@ -78,8 +80,8 @@ if (Meteor.isClient) {
   Template.uploader.events({
     'change input': function(e, tmpl){
       Session.set("consonating", true);
-      startFadingLyrics();
-      startSlideAnimation();
+      //startFadingLyrics();
+      //startSlideAnimation();
       time = new Date();
       userId = Meteor.default_connection._lastSessionId;
 

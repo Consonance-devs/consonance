@@ -58,7 +58,7 @@ Template.navbar.uploadDispNB = function() {
   return (Session.get("page") == "consonance");
 }
 
-Temmplate.uploader.consonatingDisp = function() {
+Template.uploader.consonatingDisp = function() {
   return Session.get("consonating");
 }
 

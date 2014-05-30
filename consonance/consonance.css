@@ -200,10 +200,11 @@ input[type=file]{
     font-size: 18px !important;
     width: 70%;
     font-weight: bold;
-    color: #ffffff;
+    color: #16BF7C;
+    background-color: #16BF7C;
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    border: 1px solid #04AF6C;
+    border: 1px solid #16BF7C;
     cursor: pointer;
 }
