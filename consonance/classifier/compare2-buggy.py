@@ -1,6 +1,7 @@
 from fingerprint import findpeaks
 from matplotlib import pyplot as plt
 import numpy
+from scipy.stats import linregress
 
 lim = 10
 
@@ -13,6 +14,7 @@ def merge(arr):
 	return d
 
 def intersect(a, b):
+	return a & b
 	s = set()
 	for i in a:
 		for t in range(i-lim, i+lim):
@@ -38,15 +40,35 @@ def compare(a, b):
 	best = 0
 
 	order = []
+	vals = []
+
 	d = {}
 	for i in a.keys():
 		#key,value = maxl({k:len(intersect(a[i], el) ) for k,el in b.items()} )	#
-		key,value = maxl({k:len(a[i] & el) for k,el in b.items() if k >= i} )
+		key,value = maxl({k:len(intersect(a[i], el) ) for k,el in b.items() if k >= i} )
 		order.append(key)
+		vals.append(value)
 		best += value
+		
+		#if value > 1:
+		d[i] = key
+			#print i, key, value
+			
 
-		if value > 1:
-			d[i] = key
+	'''t = sorted(list(d.keys()))
+	p = 1
+	for i in range(min(t), max(t)):
+		if i > t[p]:
+			p+=1
+		if i not in t:
+			d[i] = float(d[t[p]] - d[t[p-1]]) / (t[p] - t[p-1]) * i + t[d[p]]
+
+		print i, d[i]'''
+
+	'''
+	diff (p-1) and p ----- diff d[p-1] and d[p]
+	diff 
+	'''
 
 	#print order
 
@@ -68,10 +90,11 @@ def compare(a, b):
 			#print b[k]
 			print list( intersect(a[k], b[k+bestinc]) )'''
 
-	
-	#for i,v in zip(a.keys(),order):
-		
-
+	'''d = {}
+	for i,v,sim in zip(a.keys(), order, vals):
+		if sim >= 2:
+			d[i] = v
+	'''
 
 	return best, d
 
@@ -84,7 +107,7 @@ def loadmusic(name):
 		return sorted(m[0] + m[1]), duration
 	else:
 		return sorted(m[0]), duration
-
+		
 
 def correlation(order, plot=False):
 	keys = sorted(list(order.keys()))
@@ -102,21 +125,31 @@ def correlation(order, plot=False):
 	a = 1
 
 	l = [i*a + b for i in 0, max(keys) ]
+
+	nx = []
+	ny = []
+
+	'''for i in order:
+		if order[i]/2 <= i*a + b and order[i]*2 >= i*a + b:
+			nx.append(i)
+			ny.append(order[i])
+
+	a, b = numpy.polyfit(nx, ny, 1)'''
 	print a, b
 
 	#print a, b
 	#print max(order.keys())
 
-	'''
-	for i in nx:
+	'''for i in nx:
 		#key,value = maxl({k:len(intersect(a[i], el) ) for k,el in b.items()} )	#
 		key,value = maxl({k:len(merge(sample)[i] & el) for k,el in merge(music).items() if k/2 <= i*a + b and k*2 >= i*a + b } )
-		order[i] = key
-	'''
+		order[i] = key'''
+
+
 
 	if plot:
 		plt.plot([0, max(keys)], [b, a*max(keys) + b] )
 		plt.show()
 
-	return b
+	return b * 2048
 

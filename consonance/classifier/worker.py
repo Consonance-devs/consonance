@@ -18,11 +18,11 @@ music = db.Consonance
 # worker.py music.mp3
 
 def main():
-	best=0
+	best=10000000
 	bestmatch = ""
 
 
-	sample = loadmusic(argv[1])
+	sample, sampleDuration = loadmusic(argv[1])
 	#print sample
 
 	'''plt.title("Sample Peaks")
@@ -31,17 +31,47 @@ def main():
 	d = {}
 	for m in music.find():
 		k, s = compare(sample, m["peaks"]);
-		d[k] = s
-		if k > best:
-			best = k
+		
+		
+		l = [abs(i-j) for i,j in s.items()]
+
+		std = numpy.std(l)
+		print m["music"], k, numpy.std(l)
+		d[std] = s
+
+		if std < best:
+			best = std
 			bestmatch = m["music"]
 
-	print correlation(d[max(d)], True)
+	#for index, matches in d.items():
+		
+		
+
+	c = correlation(d[min(d)], False)
+	print "correlation: ", c
 	print bestmatch
 
 	srtfile = "/home/michel/data/db/" + bestmatch.split('.')[0] + ".srt"
 	print "srtfile: " + srtfile
 	readlyrics(srtfile, argv[2])
 
+
+	bmatch = music.find_one({"music": bestmatch})
+
+	maxpeak = max([i for i,j in bmatch["peaks"] ])
+	print "maxpeak: ", maxpeak
+	duration = bmatch["duration"] * 1000
+	print "duration: ", duration
+	x = (c * duration) / maxpeak + sampleDuration
+	print "x"
+	print x
+
+	'''
+		maxpeak --- duration
+		peak    --- x
+
+		maxpeak --- peak
+		duration --- x
+	'''
 
 main()
