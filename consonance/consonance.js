@@ -5,7 +5,8 @@ Lyrics = new Meteor.Collection("Lyrics")
 Alerts = new Meteor.Collection("Alerts");
 
 if (Meteor.isClient) {
-  var time;
+  time = null;
+  userId = null;
 
   Session.set("page", "home");
   Session.set("recording", true);
@@ -14,16 +15,27 @@ if (Meteor.isClient) {
 
   Meteor.startup(function(){
     window.scroll(0,1);
-    var curlyrics = 0;
 
     Meteor.autosubscribe(function() {
       Alerts.find().observe({
-        added: function(item){ 
-          console.log("Show lyrics");
-          nextLyrics();
-          var elapsed = new Date() - time;
-          mil = elapsed.getMiliseconds();
-          console.log("Elapsed Time: ", time);
+        added: function(item){
+          if(item.userId == userId){
+            console.log(item);
+            console.log("Show lyrics");
+            
+            var elapsed = new Date() - time;
+            var t = elapsed + item.time;
+            console.log("Elapsed Time: ", t);
+            Lyrics.find({userId: userId}).forEach(function(i){
+              //console.log(i);
+              if (t >= i.start && t <= i.start + i.time){
+                Session.set("lyrics", i.index);
+              }
+            });
+            Session.set("lyricsDisp", true);
+
+            nextLyrics();
+          }
         }
       });
     });
@@ -31,9 +43,10 @@ if (Meteor.isClient) {
   });
 
   function nextLyrics(){
-    if(Lyrics.findOne({index: Session.get("lyrics")}) ){
+    if(Lyrics.findOne({index: Session.get("lyrics"), userId: userId}) ){
+      console.log("derpbug");
       Session.set("lyrics", Session.get("lyrics")+1);
-      Meteor.setTimeout(nextLyrics, Lyrics.findOne({index: Session.get("lyrics")}).time );
+      Meteor.setTimeout(nextLyrics, Lyrics.findOne({index: Session.get("lyrics"), userId: userId}).time );
       //console.log( Lyrics.findOne({index: Session.get("lyrics")}) );
     }else{
       Session.set("lyricsDisp", false);
@@ -58,12 +71,13 @@ if (Meteor.isClient) {
 
   Template.lyrics.getCurrent = function(){
     return Lyrics.findOne({index: Session.get("lyrics")});
+    
   }
 
   Template.uploader.events({
     'change input': function(e, tmpl){
       time = new Date();
-      var userId = Meteor.default_connection._lastSessionId;
+      userId = Meteor.default_connection._lastSessionId;
 
       e.preventDefault();
       var fileinput = tmpl.find('input[type=file]');
@@ -79,9 +93,7 @@ if (Meteor.isClient) {
           if(err){
             throw err;
           }else{
-            console.log(data);
-            Session.set("lyrics", data);
-            Session.set("lyricsDisp", true);
+
           }
         });
       });
@@ -97,6 +109,7 @@ if (Meteor.isServer) {
   
   Meteor.startup(function () {
     Lyrics.remove({});
+    Alerts.remove({});
 
     Meteor.methods({
       uploadFile: function(filename, userId){
@@ -106,8 +119,6 @@ if (Meteor.isServer) {
         var corr = 0;
         pyWorker(filename, userId);
         //console.log(name, corr);
-
-        return 1
       }
     });
 
@@ -122,14 +133,16 @@ if (Meteor.isServer) {
         console.log(stderr);
         console.log(stdout);
         var r = stdout.split('\n');
+        console.log("result: " + r[r.length-2]);
+        v = parseInt(parseFloat(r[r.length-2]));
         //name = r[r.length-1];
         //corr = int(r[r.length-2]);
 
-        Meteor.publish("alerts", function(){
+        /*Meteor.publish("alerts", function(){
           Alerts.find();
-        });
-        Alerts.remove({});
-        Alerts.insert({message: "Some message to show on every client.", userId: userId});
+        });*/
+        //Alerts.remove({userId: userId});
+        Alerts.insert({userId: userId, time: v});
 
         console.log("END");
       }));

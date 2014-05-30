@@ -11,6 +11,9 @@ lyrics = db.Lyrics
 def parsems(s):
 	return int(s[0:2])*1000*60*60 + int(s[3:5])*1000*60 + int(s[6:8])*1000 + int(s[9:12])
 
+def getText(s):
+	return '<br>'.join(s.split('\n'))
+
 def readlyrics(filepath, userId):
 	print userId
 
@@ -49,7 +52,7 @@ def readlyrics(filepath, userId):
 				t = result[len(result)-1][2] + result[len(result)-1][1];
 				result.append((index, start - t, t, ""));
 				index += 1;
-			result.append((index, time, start, text))
+			result.append((index, time, start, getText(text) ))
 			#print index, time, text
 
 		state = (state + 1) % 3

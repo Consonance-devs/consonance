@@ -37,7 +37,7 @@ def read(filename, limit=None):
     for chn in xrange(audiofile.channels):
         channels.append(data[chn::audiofile.channels])
 
-    return channels, audiofile.frame_rate
+    return channels, audiofile.frame_rate, audiofile.duration_seconds
 
 
 def path_to_songname(path):

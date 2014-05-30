@@ -106,7 +106,7 @@ def findpeaks(filename, music, limit=None, song_name=None):
 
     song_name = song_name or songname
 
-    channels, Fs = decoder.read(filename, limit)
+    channels, Fs, duration = decoder.read(filename, limit)
 
     result = set()
 
@@ -119,6 +119,8 @@ def findpeaks(filename, music, limit=None, song_name=None):
         music.append( fingerprint(channel, Fs=Fs) )
         print("Finished channel %d/%d for %s" % (channeln + 1, channel_amount,
                                                  filename))
+
+    return duration
 
 
 '''
