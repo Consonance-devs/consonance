@@ -33,6 +33,14 @@ ul > hr {
     width: 85%;
 }
 
+#lyrics_hr_bottom {
+    border-color:black;
+    border-width: 15px;
+    width: 85%;
+    /*position: fixed;
+    bottom: 10%;
+    left: 7.5%;*/
+}
 li:hover {
     cursor: pointer;
 }
@@ -154,6 +162,10 @@ btn-success:focus {
 #lyrics_container {
     width: 100%;
     font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
 }
 
 .topbar{
@@ -176,22 +188,7 @@ input[type=file]{
     border-radius: 3px;
     padding: 10px 15px 11px !important;
     font-size: 18px !important;
-    width: 50%;
-    font-weight: bold;
-    color: #ffffff;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border: 1px solid #04AF6C;
-    cursor: pointer;
-}
-
-input[type=submit]{
-    margin-top: 5px;
-    border-radius: 3px;
-    padding: 10px 15px 11px !important;
-    font-size: 18px !important;
-    background-color: #04AF6C;
+    width: 70%;
     font-weight: bold;
     color: #ffffff;
     border-radius: 5px;
