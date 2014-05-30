@@ -65,7 +65,7 @@ if (Meteor.isClient) {
     //return Session.get("recording");
     return true;
   }
-  Template.pagecontent.lyricsDisp = function() {
+  Template.uploader.lyricsDisp = function() {
     return Session.get("lyricsDisp");
   }
 

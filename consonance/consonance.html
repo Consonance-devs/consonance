@@ -24,9 +24,6 @@
         {{/if}}
         {{#if uploadDisp}}
             {{>uploader}}
-            {{#if lyricsDisp}}
-                {{>lyrics}}
-            {{/if}}
         {{/if}}
 	</div>
 </template>
@@ -79,7 +76,9 @@
         <div id = "spacer"></div>
         <hr id = "lyrics_hr">
         <div id = "lyrics_container">
-
+            {{#if lyricsDisp}}
+                {{>lyrics}}
+            {{/if}}
         </div> 
         <hr id = "lyrics_hr">
     </div>

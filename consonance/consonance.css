@@ -161,7 +161,7 @@ btn-success:focus {
 	padding: 6px;
 }
 
-#uploadfile{
+#uploadfile {
     margin-top: -15%;
     padding-top: 20px;
 }
@@ -176,7 +176,7 @@ input[type=file]{
     border-radius: 3px;
     padding: 10px 15px 11px !important;
     font-size: 18px !important;
-    background-color: #04AF6C;
+    width: 50%;
     font-weight: bold;
     color: #ffffff;
     border-radius: 5px;
