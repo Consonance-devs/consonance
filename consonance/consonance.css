@@ -27,13 +27,19 @@ ul > hr {
     width: 100%;
 }
 
-.navbar_item {
-    color: white;
-    font-size: 15px;
+#lyrics_hr {
+    border-color:black;
+    border-width: 15px;
+    width: 85%;
 }
 
 li:hover {
     cursor: pointer;
+}
+
+.navbar_item {
+    color: white;
+    font-size: 15px;
 }
 
 #navigation {
@@ -145,13 +151,25 @@ btn-success:focus {
     vertical-align: middle;
 }
 
+#lyrics_container {
+    width: 100%;
+    font-size: 30px;
+}
+
 .topbar{
 	height: 5%;
 	padding: 6px;
 }
 
 #uploadfile{
+    margin-top: -15%;
     padding-top: 20px;
+}
+
+#spacer {
+    margin-top: 10%;
+    height: 15%;
+    width: 100%;
 }
 
 input[type=file]{
