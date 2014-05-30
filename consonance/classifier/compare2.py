@@ -6,7 +6,7 @@ lim = 10
 
 def merge(arr):
 	d = {}
-	for i,j in  arr:
+	for i,j in arr:
 		if i not in d:
 			d[i] = set()
 		d[i].add(j)
@@ -25,7 +25,7 @@ def intersect(a, b):
 
 def maxl(d):
 	k, v = (0,0)
-	for i in d:
+	for i in sorted(d.keys()):
 		if d[i] > v:
 			k = i
 			v = d[i]
@@ -41,12 +41,16 @@ def compare(a, b):
 	d = {}
 	for i in a.keys():
 		#key,value = maxl({k:len(intersect(a[i], el) ) for k,el in b.items()} )	#
-		key,value = maxl({k:len(a[i] & el) for k,el in b.items() if k >= i} )
+		key,value = maxl({k:len(a[i] & el) for k,el in b.items()} )
 		order.append(key)
-		best += value
+		
 
-		if value > 1:
-			d[i] = key
+		#if value > 1:
+		d[i] = key
+		best += value
+		print i, key, value
+
+	return best, d
 
 	#print order
 
@@ -70,10 +74,6 @@ def compare(a, b):
 
 	
 	#for i,v in zip(a.keys(),order):
-		
-
-
-	return best, d
 
 
 def loadmusic(name):

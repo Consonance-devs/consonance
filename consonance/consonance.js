@@ -44,7 +44,7 @@ if (Meteor.isClient) {
 
   function nextLyrics(){
     if(Lyrics.findOne({index: Session.get("lyrics"), userId: userId}) ){
-      console.log("derpbug");
+      //console.log("derpbug");
       Session.set("lyrics", Session.get("lyrics")+1);
       Meteor.setTimeout(nextLyrics, Lyrics.findOne({index: Session.get("lyrics"), userId: userId}).time );
       //console.log( Lyrics.findOne({index: Session.get("lyrics")}) );
@@ -70,7 +70,7 @@ if (Meteor.isClient) {
   }
 
   Template.lyrics.getCurrent = function(){
-    return Lyrics.findOne({index: Session.get("lyrics")});
+    return Lyrics.findOne({index: Session.get("lyrics"), userId: userId});
     
   }
 

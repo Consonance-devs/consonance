@@ -35,8 +35,9 @@ def main():
 		
 		l = [abs(i-j) for i,j in s.items()]
 
-		std = numpy.std(l)
-		print m["music"], k, numpy.std(l)
+		std = numpy.std(l)/len(l)/k
+		print m["music"], k, std
+		print "corr: ", s
 		d[std] = s
 
 		if std < best:
@@ -47,7 +48,7 @@ def main():
 		
 		
 
-	c = correlation(d[min(d)], False)
+	c = correlation(d[min(d)], True)
 	print "correlation: ", c
 	print bestmatch
 
