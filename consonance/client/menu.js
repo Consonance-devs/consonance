@@ -1,59 +1,65 @@
 Template.navbar.events({
-    'click #consonating': function () {
-      console.log('Consonating clicked!')
-      Session.set("page", "consonance")
-    }
-  });
-    
+  'click #consonating': function () {
+    console.log('Consonating clicked!')
+    Session.set("page", "consonance")
+  }
+});
+  
 Template.navbar.events({
-    'click #how_to_use': function () {
-      console.log('How to use clicked!')
-      Session.set("page", "howToUse")
-    }
-  });
+  'click #how_to_use': function () {
+    console.log('How to use clicked!')
+    Session.set("page", "howToUse")
+  }
+});
 
 Template.navbar.events({
-    'click #about': function () {
-      console.log('About clicked!')
-      Session.set("page", "about")
-    }
-  });
+  'click #about': function () {
+    console.log('About clicked!')
+    Session.set("page", "about")
+  }
+});
 
 Template.home.events({
-    'click #home_content': function () {
-      console.log('Image clicked!')
-      Session.set("page", "consonance")
-    }
-  });
+  'click #logo': function () {
+    console.log('Image clicked!')
+    Session.set("page", "consonance")
+  }
+});
 
 Template.pagecontent.homeDisp = function() {
-    return (Session.get("page") == "home");
-  }
+  return (Session.get("page") == "home");
+}
 
 Template.pagecontent.aboutDisp = function() {
-    return (Session.get("page") == "about");
-  }
+  return (Session.get("page") == "about");
+}
 
 Template.pagecontent.howToUseDisp = function() {
-    return (Session.get("page") == "howToUse");
-  }
+  return (Session.get("page") == "howToUse");
+}
 
 Template.pagecontent.uploadDisp = function() {
-    return (Session.get("page") == "consonance");
-  }
+  return (Session.get("page") == "consonance");
+}
 
-  Template.navbar.homeDispNB = function() {
-    return (Session.get("page") == "home");
-  }
+Template.navbar.homeDispNB = function() {
+  return (Session.get("page") == "home");
+}
 
 Template.navbar.aboutDispNB = function() {
-    return (Session.get("page") == "about");
-  }
+  return (Session.get("page") == "about");
+}
 
 Template.navbar.howToUseDispNB = function() {
-    return (Session.get("page") == "howToUse");
-  }
+  return (Session.get("page") == "howToUse");
+}
 
 Template.navbar.uploadDispNB = function() {
-    return (Session.get("page") == "consonance");
-  }
+  return (Session.get("page") == "consonance");
+}
+
+$(function() {
+  $('#navigation-collapse').on('click', 'li', null, function() {
+    $('#navigation-collapse').collapse('hide');
+  });
+});
