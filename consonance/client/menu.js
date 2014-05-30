@@ -41,3 +41,19 @@ Template.pagecontent.howToUseDisp = function() {
 Template.pagecontent.uploadDisp = function() {
     return (Session.get("page") == "consonance");
   }
+
+  Template.navbar.homeDispNB = function() {
+    return (Session.get("page") == "home");
+  }
+
+Template.navbar.aboutDispNB = function() {
+    return (Session.get("page") == "about");
+  }
+
+Template.navbar.howToUseDispNB = function() {
+    return (Session.get("page") == "howToUse");
+  }
+
+Template.navbar.uploadDispNB = function() {
+    return (Session.get("page") == "consonance");
+  }

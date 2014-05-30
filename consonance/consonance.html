@@ -41,11 +41,24 @@
                 <button type = "button" class = "navbar-toggle" data-toggle = "collapse" data-target = "#navigation-collapse">
                     <i class = "fa fa-bars" style ="width: 15px; heigth: 15px;"></i>
                 </button>
-                <div class = "navbar-brand"><span>CONSONANCE</span></div>
+                <div class = "navbar-brand"><span>
+                    {{#if homeDispNB}}
+                        CONSONANCE
+                    {{/if}}
+                    {{#if aboutDispNB}}
+                        ABOUT
+                    {{/if}}
+                    {{#if howToUseDispNB}}
+                        HOW TO USE
+                    {{/if}}
+                    {{#if uploadDispNB}}
+                        CONSONANCE
+                    {{/if}}
+                </span></div>
             </div>
             <div id = "navigation-collapse" class = "collapse navbar-collapse">
                 <ul class = "nav navbar-nav navbar-right">
-                    <li class = "navbar_item" id = "consonating">CONSONATING</li>
+                    <li class = "navbar_item" id = "consonating">CONSONANCE</li>
                     <hr>
                     <li class = "navbar_item" id = "how_to_use">HOW TO USE</li>
                     <hr>
@@ -60,7 +73,7 @@
     <div id="uploadfile">
         <center>
             <form>
-                <input type="file" name="file" accept="audio/*" capture>
+                <input type="file" name="file" accept="audio/*" capture/>
             </form>
         </center>
     </div>

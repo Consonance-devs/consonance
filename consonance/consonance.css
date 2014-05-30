@@ -94,7 +94,7 @@ btn-success:focus {
 }
 
 #image_container{
-    margin-top: 25%;
+    margin-top: -15%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -104,32 +104,27 @@ btn-success:focus {
 
 #about_text {
     margin-top: 10px;
+    text-align: center;
     font-weight: bold;
 }
 
-#howtouse{
-    margin-top: 50%;
-    width: 100%;
-    height: 70%;
-    display: table;
-    overflow: hidden;
-    text-align: center
-}
-
 #howtouse_text{
-    display: table-cell;
-    vertical-align: middle;
+    margin-top: 10px;
     text-align: center;
     font-weight: bold;
 }
 
 #home_content {
-    margin-top: 25%;
+    margin-top: -15%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     vertical-align: middle;
     width: 100%;
+}
+
+#home_content:hover {
+    cursor: pointer;
 }
 
 #home_text {
@@ -150,10 +145,6 @@ btn-success:focus {
     vertical-align: middle;
 }
 
-#about_text {
-    text-align: center;
-}
-
 .topbar{
 	height: 5%;
 	padding: 6px;
@@ -161,6 +152,11 @@ btn-success:focus {
 
 #uploadfile{
     padding-top: 20px;
+}
+
+#aux {
+    width: 100%;
+    height: 100%;
 }
 
 input[type=file]{
