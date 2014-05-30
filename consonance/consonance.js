@@ -71,6 +71,7 @@ if (Meteor.isClient) {
 
   Template.lyrics.getCurrent = function(){
     return Lyrics.findOne({index: Session.get("lyrics")});
+    
   }
 
   Template.uploader.events({
