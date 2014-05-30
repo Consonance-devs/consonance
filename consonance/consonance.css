@@ -154,11 +154,6 @@ btn-success:focus {
     padding-top: 20px;
 }
 
-#aux {
-    width: 100%;
-    height: 100%;
-}
-
 input[type=file]{
     border-radius: 3px;
     padding: 10px 15px 11px !important;
