@@ -11,12 +11,10 @@ music = db.Consonance
 def main():
 	
 	if len(argv) >= 3:
-		#print len(argv)
 		peaks, duration = loadmusic(argv[1])
 
 		d = {"music": argv[1], "peaks": peaks}
 		cmd = "cp \"" + argv[2] + "\" ~/data/db/\"" + argv[1].split('.')[0] + ".srt\""
-		#print cmd
 		system(cmd)
 		d["lyrics"] = argv[2]
 		d["duration"] = duration
@@ -26,7 +24,6 @@ def main():
 		if len(argv) > 4:
 			d["album"] = argv[4]
 
-		#print d
 		music.insert(d)
 		print "Added " + d["music"] + " to music collection, with lyrics file " + "\"~/data/db/\"" + argv[1].split('.')[0] + ".srt\"" + "."
 	else:

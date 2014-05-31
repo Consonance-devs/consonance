@@ -15,7 +15,9 @@ def getText(s):
 	return '<br>'.join(s.split('\n'))
 
 def readlyrics(filepath, userId):
-	print userId
+	'''Reads Lyirics file and stores them in the mongodb collection, such that they can be played by the browser.
+	'''
+	#print userId
 
 	state = INDEX
 	index = 0
@@ -33,7 +35,6 @@ def readlyrics(filepath, userId):
 				break
 			else:
 				d = line.split()[0]
-				#index = int(d)
 				index+=1
 		elif state == HEADER:
 			line = f.readline()

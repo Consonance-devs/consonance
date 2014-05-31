@@ -3,7 +3,7 @@ fadeLoop = null;
 slideLoop = null;
 sLeft = true;
 
-function fadeLyrics() {
+fadeLyrics = function (){
     if (state=="in"){
         state = "out";
         $("#lyrics_container").fadeIn(1000);
@@ -13,15 +13,15 @@ function fadeLyrics() {
     }
 }
 
-function startFadingLyrics(){
+startFadingLyrics = function (){
     fadeLoop = setInterval(fadeLyrics,1000);
 }
 
-function stopFadingLyrics(){
+stopFadingLyrics = function (){
     clearInterval(fadeLoop);
 }
 
-function slideAnimation(){
+slideAnimation = function (){
     if (sLeft){
         $("#lyrics_hr_top").animate({"margin-left" : "-20%",}, 500);
         $("#lyrics_hr_bot").animate({"margin-right" : "-20%",}, 500);
@@ -34,6 +34,6 @@ function slideAnimation(){
     }
 }
 
-function startSlideAnimation(){
+startSlideAnimation = function (){
     slideLoop = setInterval(slideAnimation,1000);
 }
