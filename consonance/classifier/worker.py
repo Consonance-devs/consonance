@@ -14,7 +14,6 @@ music = db.Consonance
 #for i in music.find():
 #	print i["music"]
 
-
 # worker.py music.mp3
 
 def main():
@@ -34,21 +33,20 @@ def main():
 		
 		
 		l = [abs(i-j) for i,j in s.items()]
+		std = numpy.std(l)
+		print m["music"]
+		#print "corr: ", s
+		#d[std] = s
+		d[k] = s
 
-		std = numpy.std(l)/len(l)/k
-		print m["music"], k, std
-		print "corr: ", s
-		d[std] = s
-
-		if std < best:
-			best = std
+		if k < best:
+			best = k
 			bestmatch = m["music"]
 
 	#for index, matches in d.items():
 		
-		
-
-	c = correlation(d[min(d)], True)
+	
+	c = correlation(d[max(d.keys())], True)
 	print "correlation: ", c
 	print bestmatch
 

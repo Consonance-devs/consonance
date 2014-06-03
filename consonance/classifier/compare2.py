@@ -2,7 +2,7 @@ from fingerprint import findpeaks
 from matplotlib import pyplot as plt
 import numpy
 
-lim = 10
+lim = 3
 
 def merge(arr):
 	d = {}
@@ -13,6 +13,7 @@ def merge(arr):
 	return d
 
 def intersect(a, b):
+	#return a & b
 	s = set()
 	for i in a:
 		for t in range(i-lim, i+lim):
@@ -31,51 +32,6 @@ def maxl(d):
 			v = d[i]
 	return k, v
 
-def compare(a, b):
-	a = merge(a)
-	b = merge(b)
-	bestinc = 0
-	best = 0
-
-	order = []
-	d = {}
-	for i in a.keys():
-		#key,value = maxl({k:len(intersect(a[i], el) ) for k,el in b.items()} )	#
-		key,value = maxl({k:len(a[i] & el) for k,el in b.items()} )
-		order.append(key)
-		
-
-		#if value > 1:
-		d[i] = key
-		best += value
-		print i, key, value
-
-	return best, d
-
-	#print order
-
-	'''for inc in range(0, max(b)-max(a)):
-		cur = 0
-		for k in a.keys():
-			if k+inc in b.keys():
-				cur += len(a[k] & b[k+inc])
-				#cur += len( intersect(a[k], b[k+inc] ))
-
-		if cur > best:
-			best = cur
-			bestinc = inc'''
-
-
-	'''for k in a.keys():
-		if k+bestinc in b.keys():
-			#print a[k]
-			#print b[k]
-			print list( intersect(a[k], b[k+bestinc]) )'''
-
-	
-	#for i,v in zip(a.keys(),order):
-
-
 def loadmusic(name):
 	m = []
 	duration = findpeaks(name, m)
@@ -84,6 +40,28 @@ def loadmusic(name):
 		return sorted(m[0] + m[1]), duration
 	else:
 		return sorted(m[0]), duration
+
+def compare(a, b): # compares the sample with each music
+	a = merge(a)
+	b = merge(b)
+	bestinc = 0
+	sim1 = 0
+	sim = 0
+
+	order = []
+	d = {}
+	for i in a.keys():
+		key,value = maxl({k:len(intersect(a[i], el) ) for k,el in b.items()} )	#
+		#key,value = maxl({k:len(a[i] & el) for k,el in b.items()} )
+
+		sim1 += value
+		if value > 1:
+			d[i] = key
+			sim += value
+			print i, key, value
+
+	print sim, "(", sim1, ")"
+	return sim*50 + sim1, d
 
 
 def correlation(order, plot=False):
