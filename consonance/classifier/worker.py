@@ -2,7 +2,7 @@
 from fingerprint import findpeaks
 from sys import argv
 from os import system
-from compare2 import *
+from compare import *
 from matplotlib import pyplot as plt
 from readlyrics import *
 
