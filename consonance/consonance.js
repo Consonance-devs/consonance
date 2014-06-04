@@ -21,7 +21,7 @@ if (Meteor.isClient) {
       Alerts.find().observe({
         added: function(item){
           if(item.userId == userId){
-            //stopFadingLyrics();
+            stopFadingLyrics();
             console.log(item);
             console.log("Show lyrics");
             
@@ -29,7 +29,7 @@ if (Meteor.isClient) {
             var t = elapsed + item.time;
             console.log("Elapsed Time: ", t);
             Lyrics.find({userId: userId}).forEach(function(i){
-              //console.log(i);
+              console.log(i);
               if (t >= i.start && t <= i.start + i.time){
                 Session.set("lyrics", i.index);
               }
@@ -47,14 +47,11 @@ if (Meteor.isClient) {
 
   function nextLyrics(){
     if(Lyrics.findOne({index: Session.get("lyrics"), userId: userId}) ){
-      //console.log("derpbug");
       Session.set("lyrics", Session.get("lyrics")+1);
       Meteor.setTimeout(nextLyrics, Lyrics.findOne({index: Session.get("lyrics"), userId: userId}).time );
-      //console.log( Lyrics.findOne({index: Session.get("lyrics")}) );
     }else{
       Session.set("lyricsDisp", false);
       return;
-      //Meteor.setTimeout(nextLyrics, 1000);
     }
   }
 
@@ -80,8 +77,8 @@ if (Meteor.isClient) {
   Template.uploader.events({
     'change input': function(e, tmpl){
       Session.set("consonating", true);
-      //startFadingLyrics();
-      //startSlideAnimation();
+      startFadingLyrics();
+      startSlideAnimation();
       time = new Date();
       userId = Meteor.default_connection._lastSessionId;
 
@@ -121,10 +118,7 @@ if (Meteor.isServer) {
       uploadFile: function(filename, userId){
         Lyrics.remove({userId: userId});
         console.log("Upload Successful");
-        var name = "";
-        var corr = 0;
         pyWorker(filename, userId);
-        //console.log(name, corr);
       }
     });
 
@@ -141,13 +135,7 @@ if (Meteor.isServer) {
         var r = stdout.split('\n');
         console.log("result: " + r[r.length-2]);
         v = parseInt(parseFloat(r[r.length-2]));
-        //name = r[r.length-1];
-        //corr = int(r[r.length-2]);
 
-        /*Meteor.publish("alerts", function(){
-          Alerts.find();
-        });*/
-        //Alerts.remove({userId: userId});
         Alerts.insert({userId: userId, time: v});
 
         console.log("END");

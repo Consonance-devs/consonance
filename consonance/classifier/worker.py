@@ -17,7 +17,7 @@ music = db.Consonance
 # worker.py music.mp3
 
 def main():
-	best=10000000
+	best=0
 	bestmatch = ""
 
 
@@ -28,27 +28,45 @@ def main():
 	plt.plot(*zip(*sample))
 	plt.show()'''
 	d = {}
+	names = {}
 	for m in music.find():
-		k, s = compare(sample, m["peaks"]);
 		
-		
-		l = [abs(i-j) for i,j in s.items()]
-		std = numpy.std(l)
 		print m["music"]
-		#print "corr: ", s
-		#d[std] = s
+		k, s = compare(sample, m["peaks"]);
+		compare_std(s)
+		
+		#l = [abs(i-j) for i,j in s.items()]
+		#std = numpy.std(l)
+		
 		d[k] = s
+		names[k] = m["music"]
 
-		if k < best:
+		if k > best:
 			best = k
 			bestmatch = m["music"]
 
 	#for index, matches in d.items():
-		
 	
-	c = correlation(d[max(d.keys())], True)
+	print 'best:', bestmatch
+	match = max(d.keys())
+
+
+	if len(d) >= 2:
+		l = sorted(d.keys()) 
+		bestind = l[len(l)-1]
+		sbestind = l[len(l)-2]
+		if diff(bestind, sbestind) < 0.01:
+			a = compare_std(d[bestind])
+			b = compare_std(d[sbestind])
+			if b < a:
+				match = sbestind
+				bestmatch = names[sbestind]
+				print "new best match: ", names[sbestind]	
+
+
+	c = correlation(d[match])
 	print "correlation: ", c
-	print bestmatch
+	
 
 	srtfile = "/home/michel/data/db/" + bestmatch.split('.')[0] + ".srt"
 	print "srtfile: " + srtfile
