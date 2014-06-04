@@ -21,7 +21,7 @@ if (Meteor.isClient) {
       Alerts.find().observe({
         added: function(item){
           if(item.userId == userId){
-            stopFadingLyrics();
+            //stopFadingLyrics();
             console.log(item);
             console.log("Show lyrics");
             
@@ -29,7 +29,7 @@ if (Meteor.isClient) {
             var t = elapsed + item.time;
             console.log("Elapsed Time: ", t);
             Lyrics.find({userId: userId}).forEach(function(i){
-              console.log(i);
+              //console.log(i);
               if (t >= i.start && t <= i.start + i.time){
                 Session.set("lyrics", i.index);
               }
@@ -77,8 +77,8 @@ if (Meteor.isClient) {
   Template.uploader.events({
     'change input': function(e, tmpl){
       Session.set("consonating", true);
-      startFadingLyrics();
-      startSlideAnimation();
+      //startFadingLyrics();
+      //startSlideAnimation();
       time = new Date();
       userId = Meteor.default_connection._lastSessionId;
 
